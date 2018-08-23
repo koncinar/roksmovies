@@ -12,6 +12,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "URL_THE_MOVIE_DB", "\"https://api.themoviedb.org/\""
+        buildConfigField "String", "KEY_THE_MOVIE_DB", "\"f8d9b6a4fcff8b01d8141c7bc884e926\""
+
     }
 
     dataBinding {
@@ -38,6 +42,10 @@ dependencies {
 
     // the following line is needed to enable Kotlin annotation processor for @BindingAdapter annotation
     kapt 'com.android.databinding:compiler:3.1.4'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 
     // Unit Testing
     testImplementation 'junit:junit:4.12'

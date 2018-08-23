@@ -1,10 +1,11 @@
-package rocks.koncina.roksmovies.movieslist
+package rocks.koncina.roksmovies.movieslist.view
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import rocks.koncina.roksmovies.R
+import rocks.koncina.roksmovies.movieslist.model.Movie
 
 class MoviesListAdapter : RecyclerView.Adapter<MovieViewHolder>() {
     var movies = listOf<Movie>()
