@@ -6,14 +6,23 @@
 
         <variable
             name="viewModel"
-            type="rocks.koncina.roksmovies.movieslist.MoviesListViewModel" />
+            type="rocks.koncina.roksmovies.movieslist.viewmodel.MoviesListViewModel" />
     </data>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/movies_list"
+
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/listBackground"
-        app:movies="@{viewModel.movies}" />
+        app:onRefreshListener="@{() -> viewModel.refresh()}"
+        app:refreshing="@{viewModel.refreshing}">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/movies_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/listBackground"
+            app:movies="@{viewModel.movies}" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </layout>
