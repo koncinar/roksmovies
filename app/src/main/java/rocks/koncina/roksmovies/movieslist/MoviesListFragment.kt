@@ -1,4 +1,4 @@
-package rocks.koncina.roksmovies
+package rocks.koncina.roksmovies.movieslist
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -14,7 +14,7 @@ class MoviesListFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding = FragmentMoviesListBinding.inflate(inflater, container, false)
 
-        binding.viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        binding.viewModel = ViewModelProviders.of(this).get(MoviesListViewModel::class.java)
 
         return binding.root
     }
