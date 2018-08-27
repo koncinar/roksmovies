@@ -6,7 +6,7 @@ import android.arch.lifecycle.Observer
 import android.databinding.BindingAdapter
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import rocks.koncina.roksmovies.movieslist.model.Movie
+import rocks.koncina.roksmovies.movieslist.api.Movie
 import rocks.koncina.roksmovies.movieslist.view.MoviesListAdapter
 
 @BindingAdapter("movies")

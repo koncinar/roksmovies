@@ -2,7 +2,7 @@ package rocks.koncina.roksmovies.movieslist.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
-import rocks.koncina.roksmovies.movieslist.model.Movie
+import rocks.koncina.roksmovies.movieslist.api.Movie
 import rocks.koncina.roksmovies.movieslist.model.MoviesRepository
 
 class MoviesListViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {

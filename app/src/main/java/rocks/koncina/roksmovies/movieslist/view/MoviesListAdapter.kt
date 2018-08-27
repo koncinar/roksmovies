@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import rocks.koncina.roksmovies.R
-import rocks.koncina.roksmovies.movieslist.model.Movie
+import rocks.koncina.roksmovies.movieslist.api.Movie
 
 class MoviesListAdapter : RecyclerView.Adapter<MovieViewHolder>() {
     var movies = listOf<Movie>()
