@@ -1,7 +1,6 @@
 package rocks.koncina.roksmovies.movieslist.api
 
 import com.google.gson.annotations.SerializedName
-import rocks.koncina.roksmovies.movieslist.model.Movie
 
 data class MoviesResponse(
         @SerializedName("page") val page: Int? = null,
