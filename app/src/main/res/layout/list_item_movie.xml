@@ -17,27 +17,41 @@
         android:background="@color/listItemBackground"
         android:padding="10dp">
 
+        <ImageView
+            android:id="@+id/item_movie_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_item_movie_image_height"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:thumbnail="@{movie.thumbnailUrl}"
+            tools:ignore="ContentDescription" />
+
         <TextView
             android:id="@+id/item_movie_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginRight="16dp"
+            android:layout_marginStart="8dp"
             android:text="@{movie.title}"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/item_movie_release_date"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_movie_thumbnail"
             tools:text="Movie" />
 
         <TextView
             android:id="@+id/item_movie_release_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="@{movie.releaseYear}"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/item_movie_title"
             tools:text="Release date" />
 
         <TextView
@@ -54,7 +68,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginRight="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@{movie.genres}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -62,5 +78,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_movie_title"
             tools:text="Action, Comedy" />
+
     </android.support.constraint.ConstraintLayout>
 </layout>
