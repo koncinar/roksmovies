@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface TheMovieDbService {
 
-    @GET("/3/discover/movie")
+    @GET("/3/movie/popular")
     fun getDiscoverMovies(@Query("api_key") key: String): Single<MoviesResponse>
 
     @GET("/3/genre/movie/list")
