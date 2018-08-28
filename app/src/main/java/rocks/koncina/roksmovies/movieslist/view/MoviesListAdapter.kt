@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import rocks.koncina.roksmovies.R
 import rocks.koncina.roksmovies.movieslist.api.Movie
 
-class MoviesListAdapter(private val movieSelectedListener: MovieSelectedListener)
-    : RecyclerView.Adapter<MovieViewHolder>() {
+class MoviesListAdapter(
+        private val movieSelectedListener: (Movie) -> Unit
+) : RecyclerView.Adapter<MovieViewHolder>() {
+
     var movies = listOf<Movie>()
         set(value) {
             field = value

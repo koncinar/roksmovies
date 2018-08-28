@@ -13,7 +13,8 @@ import rocks.koncina.roksmovies.movieslist.model.MoviesRepository
 
 class InstanceFactory {
 
-    val moviesRepository by lazy { MoviesRepository(theMovieDbService) }
+    // each fragment needs a new instance of repository otherwise it's retaining data from the previous one
+    fun moviesRepository() = MoviesRepository(theMovieDbService)
 
     val movieDetailsRepository by lazy { MovieDetailsRepository(movieDetailsTheMovieDbService) }
 

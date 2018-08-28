@@ -17,6 +17,9 @@ android {
         buildConfigField "String", "URL_THE_MOVIE_DB_THUMBNAILS", "\"https://image.tmdb.org/t/p/w500\""
         buildConfigField "String", "KEY_THE_MOVIE_DB", "\"f8d9b6a4fcff8b01d8141c7bc884e926\""
 
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     dataBinding {
