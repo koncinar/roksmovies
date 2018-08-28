@@ -8,6 +8,10 @@
         <variable
             name="movie"
             type="rocks.koncina.roksmovies.movieslist.api.Movie" />
+
+        <variable
+            name="movieSelectedListener"
+            type="rocks.koncina.roksmovies.movieslist.view.MovieSelectedListener" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -15,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@color/listItemBackground"
+        android:onClickListener="@{() -> movieSelectedListener.onSelected(movie)}"
         android:padding="10dp">
 
         <ImageView
@@ -36,7 +41,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="@{movie.title}"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/item_movie_release_date"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,8 +54,8 @@
             android:id="@+id/item_movie_release_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@{movie.releaseYear}"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/item_movie_title"
@@ -59,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{movie.scorePrintable}"
+            android:textColor="@android:color/darker_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/item_movie_genres"
             tools:text="Score" />
@@ -72,7 +80,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@{movie.genres}"
+            android:text="@{movie.genresNames}"
+            android:textColor="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/item_movie_score"
             app:layout_constraintStart_toStartOf="parent"

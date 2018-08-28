@@ -42,6 +42,7 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.1.1"
 
     // the following line is needed to enable Kotlin annotation processor for @BindingAdapter annotation
+    implementation 'com.android.support:support-v4:27.1.1'
     kapt 'com.android.databinding:compiler:3.1.4'
 
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'

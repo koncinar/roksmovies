@@ -7,14 +7,16 @@ import android.view.ViewGroup
 import rocks.koncina.roksmovies.R
 import rocks.koncina.roksmovies.movieslist.api.Movie
 
-class MoviesListAdapter : RecyclerView.Adapter<MovieViewHolder>() {
+class MoviesListAdapter(private val movieSelectedListener: MovieSelectedListener)
+    : RecyclerView.Adapter<MovieViewHolder>() {
     var movies = listOf<Movie>()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MovieViewHolder(parent.inflate(R.layout.list_item_movie))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+            MovieViewHolder(parent.inflate(R.layout.list_item_movie), movieSelectedListener)
 
     override fun getItemCount(): Int = movies.size
 
