@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="rocks.koncina.roksmovies.movieslist.viewmodel.MoviesListViewModel" />
+
+        <variable
+            name="movieSelectedListener"
+            type="rocks.koncina.roksmovies.movieslist.view.MovieSelectedListener" />
     </data>
 
 
@@ -21,7 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/listBackground"
-            app:movies="@{viewModel.movies}" />
+            app:movies="@{viewModel.movies}"
+            app:movieSelectedListener="@{movieSelectedListener}" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

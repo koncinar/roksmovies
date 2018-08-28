@@ -1,20 +1,23 @@
-package rocks.koncina.roksmovies.movieslist.api
+package rocks.koncina.roksmovies.moviedetails.api
 
 import com.google.gson.annotations.SerializedName
+import rocks.koncina.roksmovies.movieslist.api.Genre
 
-data class Movie(
-        @SerializedName("id") val id: Long? = null,
+data class MovieDetails(
         @SerializedName("title") val title: String? = null,
         @SerializedName("backdrop_path") val thumbnailUrl: String? = null,
-        @SerializedName("genre_ids") val genreIds: List<Long>? = null,
+        @SerializedName("genres") val genres: List<Genre>? = null,
         @SerializedName("popularity") val popularityScore: Float? = null,
         @SerializedName("release_date") val releaseDate: String? = null,
 
-        // locally generated data
-        var genres: List<Genre>? = null) {
+        @SerializedName("overview") val description: String? = null,
+        @SerializedName("runtime") val runtime: Int? = null,
+        @SerializedName("revenue") val revenue: Long? = null,
+        @SerializedName("original_language") val language: String? = null,
+        @SerializedName("homepage") val homePageLink: String? = null) {
 
     /**
-     * Prints the score up to 2 decimals accuracy
+     * Prints the popularity score with 2 decimals
      */
     fun getScorePrintable() =
             if (popularityScore == null) ""
@@ -26,13 +29,6 @@ data class Movie(
     fun getReleaseYear() =
             if (releaseDate != null && releaseDate.length >= 4) releaseDate.substring(0, 4)
             else ""
-
-    /**
-     * Fills in the names for the genres and stores them in the list (field) genres
-     */
-    fun updateGenresNames(genresMap: Map<Long, String>) {
-        this.genres = genreIds?.map { Genre(it, genresMap[it]) }
-    }
 
     /**
      * Returns a single String that combines all genre names, separated by ", ".

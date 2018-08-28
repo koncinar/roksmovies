@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Roks Movies</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movie_details_view_homepage_button">View homepage</string>
+    <string name="movie_details_runtime_label">Runtime:</string>
+    <string name="movie_details_revenue_label">Revenue:</string>
+    <string name="movie_details_language_label">Language:</string>
 </resources>

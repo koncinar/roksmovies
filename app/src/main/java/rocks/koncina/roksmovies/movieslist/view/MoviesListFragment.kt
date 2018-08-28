@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import rocks.koncina.roksmovies.MainActivity
 import rocks.koncina.roksmovies.databinding.FragmentMoviesListBinding
+import rocks.koncina.roksmovies.movieslist.api.Movie
 import rocks.koncina.roksmovies.movieslist.viewmodel.MoviesListViewModel
 
 class MoviesListFragment : Fragment() {
@@ -18,7 +19,21 @@ class MoviesListFragment : Fragment() {
 
         val viewModelFactory = (context as MainActivity).viewModelFactory
         binding.viewModel = ViewModelProviders.of(this, viewModelFactory).get(MoviesListViewModel::class.java)
+        binding.movieSelectedListener = object : MovieSelectedListener {
+            override fun onSelected(movie: Movie) {
+                (context as MainActivity).openMovieDetails(movie)
+            }
+        }
 
         return binding.root
     }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = MoviesListFragment()
+    }
+}
+
+interface MovieSelectedListener {
+    fun onSelected(movie: Movie)
 }
