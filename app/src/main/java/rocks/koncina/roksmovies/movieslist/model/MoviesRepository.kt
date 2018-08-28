@@ -42,7 +42,7 @@ class MoviesRepository(private val theMovieDbService: TheMovieDbService) {
 
     private fun fetchMoviesFromApi(): Single<List<Movie>> = theMovieDbService
             // fetch the data from the server
-            .getDiscoverMovies(BuildConfig.KEY_THE_MOVIE_DB)
+            .getPopularMovies(BuildConfig.KEY_THE_MOVIE_DB)
             .subscribeOn(Schedulers.io())
             .doOnSuccess { Log.i(MoviesRepository::class.java.simpleName, "Fetching movies from the API succeeded") }
 
