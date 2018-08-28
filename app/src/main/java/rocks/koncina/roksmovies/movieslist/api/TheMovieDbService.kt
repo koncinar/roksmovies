@@ -12,4 +12,7 @@ interface TheMovieDbService {
 
     @GET("/3/genre/movie/list")
     fun getGenres(@Query("api_key") key: String): Single<GenresResponse>
+
+    @GET("/3/search/movie")
+    fun search(@Query("query") movieTitle: String, @Query("api_key") key: String): Single<MoviesResponse>
 }

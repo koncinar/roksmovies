@@ -5,11 +5,15 @@ import android.view.View
 import rocks.koncina.roksmovies.databinding.ListItemMovieBinding
 import rocks.koncina.roksmovies.movieslist.api.Movie
 
-class MovieViewHolder(itemView: View, movieSelectedListener: MovieSelectedListener) : RecyclerView.ViewHolder(itemView) {
+class MovieViewHolder(
+        itemView: View,
+        private val movieSelectedListener: (Movie) -> Unit
+) : RecyclerView.ViewHolder(itemView) {
+
     private val binding = ListItemMovieBinding.bind(itemView)
 
     init {
-        binding.movieSelectedListener = movieSelectedListener
+        binding.clickListener = View.OnClickListener { binding.movie?.let(movieSelectedListener::invoke) }
     }
 
     fun bind(movie: Movie) {

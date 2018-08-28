@@ -14,6 +14,8 @@ import rocks.koncina.roksmovies.databinding.FragmentMovieDetailsBinding
 import rocks.koncina.roksmovies.moviedetails.viewmodel.MovieDetailsViewModel
 import rocks.koncina.roksmovies.moviedetails.viewmodel.UrlClickListener
 import rocks.koncina.roksmovies.movieslist.api.Movie
+import rocks.koncina.roksmovies.setTitle
+import rocks.koncina.roksmovies.showUp
 
 
 private const val ARG_ID = "arg_id"
@@ -61,6 +63,11 @@ class MovieDetailsFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        setTitle(movie.title.orEmpty())
+        showUp(true)
+    }
 
     companion object {
         @JvmStatic

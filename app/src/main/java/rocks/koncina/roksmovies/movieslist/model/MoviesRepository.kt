@@ -74,6 +74,25 @@ class MoviesRepository(private val theMovieDbService: TheMovieDbService) {
 
         return movies
     }
+
+    fun search(movieTitle: String) {
+        Single.zip(
+                fetchGenresFromApi(),
+                fetchSearchMoviesFromApi(movieTitle),
+                Join { genres, movies -> Pair(genres, movies) })
+
+                .observeOn(Schedulers.computation())
+                .map { it -> applyGenresToMovies(it.first, it.second) }
+                .subscribe(::onMoviesFetched, ::onError)
+    }
+
+    private fun fetchSearchMoviesFromApi(movieTitle: String) = theMovieDbService
+            .search(movieTitle, BuildConfig.KEY_THE_MOVIE_DB)
+            .subscribeOn(Schedulers.io())
+            .doOnSuccess { Log.i(MoviesRepository::class.java.simpleName, "Searching for movies with title \"$movieTitle\" from the API succeeded") }
+
+            .observeOn(Schedulers.computation())
+            .map { it.results.orEmpty() }
 }
 
 private typealias Join = BiFunction<Map<Long, String>, List<Movie>, Pair<Map<Long, String>, List<Movie>>>

@@ -4,17 +4,23 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
 import rocks.koncina.roksmovies.movieslist.api.Movie
 import rocks.koncina.roksmovies.movieslist.model.MoviesRepository
+import rocks.koncina.roksmovies.movieslist.view.MoviesListAdapter
 
-class MoviesListViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {
+class MoviesListViewModel(
+        private val moviesRepository: MoviesRepository
+) : ViewModel() {
+
     val movies = moviesRepository.movies
+    val isRefreshing = ObservableBoolean(false)
 
-    var isRefreshing = ObservableBoolean(false)
+    lateinit var adapter: MoviesListAdapter
+    lateinit var searchQuery: String
+
     // Observer needs to be saved so that it can be removed when the ViewModel will be destroyed
     private val refreshingObserver: (List<Movie>?) -> Unit = { isRefreshing.set(false) }
 
     init {
         movies.observeForever(refreshingObserver)
-        refresh()
     }
 
     override fun onCleared() {
@@ -27,6 +33,12 @@ class MoviesListViewModel(private val moviesRepository: MoviesRepository) : View
      */
     fun refresh() {
         isRefreshing.set(true)
-        moviesRepository.fetchMovies()
+
+        if (searchQuery.isEmpty()) {
+            moviesRepository.fetchMovies()
+
+        } else {
+            moviesRepository.search(searchQuery)
+        }
     }
 }
