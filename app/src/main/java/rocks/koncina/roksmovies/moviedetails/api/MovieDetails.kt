@@ -14,7 +14,14 @@ data class MovieDetails(
         @SerializedName("runtime") val runtime: Int? = null,
         @SerializedName("revenue") val revenue: Long? = null,
         @SerializedName("original_language") val language: String? = null,
-        @SerializedName("homepage") val homePageLink: String? = null) {
+        @SerializedName("homepage") val homePageLink: String? = null,
+
+        var genresNames: String = "") {
+
+    init {
+        updateGenreNames()
+    }
+
 
     /**
      * Prints the popularity score with 2 decimals
@@ -31,11 +38,15 @@ data class MovieDetails(
             else ""
 
     /**
-     * Returns a single String that combines all genre names, separated by ", ".
-     * For example "Drama, Action, Comedy".
+     * Creates a single String that combines all genre names, separated by ", " and saves it into
+     * the field genreNames. Example: "Drama, Action, Comedy"
+     * This method needs to be called after the field genres is updated.
      */
-    fun getGenresNames() = genres
-            .orEmpty()
-            .map { it.name }
-            .joinToString(separator = ", ")
+    fun updateGenreNames() {
+        if (genres?.isNotEmpty() == true) {
+            genresNames = genres
+                    .map { it.name }
+                    .joinToString(separator = ", ")
+        }
+    }
 }

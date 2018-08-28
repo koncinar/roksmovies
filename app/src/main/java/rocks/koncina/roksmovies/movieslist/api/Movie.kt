@@ -11,7 +11,8 @@ data class Movie(
         @SerializedName("release_date") val releaseDate: String? = null,
 
         // locally generated data
-        var genres: List<Genre>? = null) {
+        var genres: List<Genre>? = null,
+        var genresNames: String = "") {
 
     /**
      * Prints the score up to 2 decimals accuracy
@@ -31,15 +32,11 @@ data class Movie(
      * Fills in the names for the genres and stores them in the list (field) genres
      */
     fun updateGenresNames(genresMap: Map<Long, String>) {
-        this.genres = genreIds?.map { Genre(it, genresMap[it]) }
+        if (genreIds == null) {
+            return
+        }
+        genresNames = genreIds
+                .mapNotNull { genresMap[it] }
+                .joinToString(separator = ", ")
     }
-
-    /**
-     * Returns a single String that combines all genre names, separated by ", ".
-     * For example "Drama, Action, Comedy".
-     */
-    fun getGenresNames() = genres
-            .orEmpty()
-            .map { it.name }
-            .joinToString(separator = ", ")
 }
