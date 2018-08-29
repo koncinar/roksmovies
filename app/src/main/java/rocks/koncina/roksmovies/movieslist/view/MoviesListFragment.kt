@@ -22,7 +22,7 @@ private const val ARG_QUERY = "arg_query"
 class MoviesListFragment : Fragment() {
 
     private lateinit var viewModel: MoviesListViewModel
-    private lateinit var searchQuery: String
+    private var searchQuery: String? = null
 
 
     override fun onAttach(context: Context?) {
@@ -42,10 +42,9 @@ class MoviesListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        searchQuery = arguments?.getString(ARG_QUERY).orEmpty()
+        searchQuery = arguments?.getString(ARG_QUERY)
 
-        viewModel.searchQuery = searchQuery
-        viewModel.refresh()
+        viewModel.init(searchQuery)
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -60,7 +59,9 @@ class MoviesListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        if (searchQuery.isEmpty()) {
+        val searchQuery = searchQuery
+
+        if (searchQuery == null || searchQuery.isEmpty()) {
             // main page, showing popular movies
             setTitle(getString(R.string.title_list_popular))
             showUp(false)

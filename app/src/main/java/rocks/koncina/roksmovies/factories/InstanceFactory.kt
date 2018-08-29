@@ -12,14 +12,22 @@ import rocks.koncina.roksmovies.moviedetails.api.MovieDetailsTheMovieDbService
 import rocks.koncina.roksmovies.moviedetails.model.MovieDetailsRepository
 import rocks.koncina.roksmovies.movieslist.api.TheMovieDbService
 import rocks.koncina.roksmovies.movieslist.cache.MoviesDatabase
-import rocks.koncina.roksmovies.movieslist.model.MoviesRepository
+import rocks.koncina.roksmovies.movieslist.model.*
 
 class InstanceFactory(
         private val applicationContext: Context
 ) {
 
     // each fragment needs a new instance of repository otherwise it's retaining data from the previous one
-    fun moviesRepository() = MoviesRepository(theMovieDbService, movieDao)
+    fun popularMoviesRepository() = MoviesListRepository(popularMoviesRepository, searchMoviesRepository())
+
+    private fun searchMoviesRepository() = SearchMoviesRepository(theMovieDbService, genresRepository)
+
+    private val popularMoviesRepository by lazy { PopularMoviesRepository(theMovieDbService, genresRepository, cacheRepository) }
+
+    private val genresRepository by lazy { GenresRepository(theMovieDbService) }
+
+    private val cacheRepository by lazy { CacheRepository(movieDao) }
 
     val movieDetailsRepository by lazy { MovieDetailsRepository(movieDetailsTheMovieDbService) }
 
