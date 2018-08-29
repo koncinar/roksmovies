@@ -1,7 +1,9 @@
 package rocks.koncina.roksmovies.movieslist.viewmodel
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
+import android.util.Log
 import rocks.koncina.roksmovies.movieslist.api.Movie
 import rocks.koncina.roksmovies.movieslist.model.MoviesRepository
 import rocks.koncina.roksmovies.movieslist.view.MoviesListAdapter
@@ -10,7 +12,7 @@ class MoviesListViewModel(
         private val moviesRepository: MoviesRepository
 ) : ViewModel() {
 
-    val movies = moviesRepository.movies
+    val movies = MutableLiveData<List<Movie>>()
     val isRefreshing = ObservableBoolean(false)
 
     lateinit var adapter: MoviesListAdapter
@@ -21,6 +23,8 @@ class MoviesListViewModel(
 
     init {
         movies.observeForever(refreshingObserver)
+        moviesRepository.movies.subscribe(movies::postValue,
+                { Log.e(MoviesListViewModel::class.java.simpleName, "Error while fetching movies. Previous value will remain shown.", it) })
     }
 
     override fun onCleared() {

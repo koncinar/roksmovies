@@ -1,5 +1,7 @@
 package rocks.koncina.roksmovies.factories
 
+import android.arch.persistence.room.Room
+import android.content.Context
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -9,12 +11,15 @@ import rocks.koncina.roksmovies.BuildConfig
 import rocks.koncina.roksmovies.moviedetails.api.MovieDetailsTheMovieDbService
 import rocks.koncina.roksmovies.moviedetails.model.MovieDetailsRepository
 import rocks.koncina.roksmovies.movieslist.api.TheMovieDbService
+import rocks.koncina.roksmovies.movieslist.cache.MoviesDatabase
 import rocks.koncina.roksmovies.movieslist.model.MoviesRepository
 
-class InstanceFactory {
+class InstanceFactory(
+        private val applicationContext: Context
+) {
 
     // each fragment needs a new instance of repository otherwise it's retaining data from the previous one
-    fun moviesRepository() = MoviesRepository(theMovieDbService)
+    fun moviesRepository() = MoviesRepository(theMovieDbService, movieDao)
 
     val movieDetailsRepository by lazy { MovieDetailsRepository(movieDetailsTheMovieDbService) }
 
@@ -43,6 +48,17 @@ class InstanceFactory {
 
     private val httpLoggingInterceptor by lazy {
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
+    }
+
+    // endregion
+
+    // region Room
+
+    private val movieDao by lazy { database.movieDao() }
+
+    private val database by lazy {
+        Room.databaseBuilder(applicationContext, MoviesDatabase::class.java, "movies.db")
+                .build()
     }
 
     // endregion

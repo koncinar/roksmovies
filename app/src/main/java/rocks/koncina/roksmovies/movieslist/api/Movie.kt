@@ -11,7 +11,6 @@ data class Movie(
         @SerializedName("release_date") val releaseDate: String? = null,
 
         // locally generated data
-        var genres: List<Genre>? = null,
         var genresNames: String = "") {
 
     /**

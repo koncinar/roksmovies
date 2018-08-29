@@ -16,7 +16,7 @@ import rocks.koncina.roksmovies.movieslist.view.MoviesListFragment
 
 class MainActivity : AppCompatActivity() {
 
-    val viewModelFactory by lazy { ViewModelFactory(InstanceFactory()) }
+    val viewModelFactory by lazy { ViewModelFactory(InstanceFactory(applicationContext)) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -40,7 +40,6 @@ class MovieDetailsFragment : Fragment() {
                     it.getLongArray(ARG_GENRE_IDS).asList(),
                     it.getFloat(ARG_POPULARITY_SCORE),
                     it.getString(ARG_RELEASE_DATE),
-                    null,
                     it.getString(ARG_GENRES_NAMES)
             )
         }
