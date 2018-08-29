@@ -5,6 +5,7 @@ import android.databinding.ObservableField
 import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import rocks.koncina.roksmovies.moviedetails.api.MovieDetails
 import rocks.koncina.roksmovies.moviedetails.model.MovieDetailsRepository
 import rocks.koncina.roksmovies.movieslist.api.Movie
 
@@ -42,7 +43,7 @@ class MovieDetailsViewModel(
                             releaseYear.set(it?.getReleaseYear())
                             thumbnailUrl.set(it?.thumbnailUrl)
                             homePageLink.set(it?.homePageLink)
-                            genresNames.set(it?.getGenresNames())
+                            genresNames.set(it?.genresNames)
                             score.set(it?.getScorePrintable())
                             runtime.set(formatRuntime(it?.runtime))
                             revenue.set(formatRevenue(it?.revenue))
@@ -56,7 +57,14 @@ class MovieDetailsViewModel(
     fun initialize(movie: Movie, urlClickListener: UrlClickListener) {
         this.urlClickListener = urlClickListener
         movieDetailsRepository.fetchMovieDetails(movie.id!!)
-        movieDetailsRepository.setInitialMovie(movie)
+
+        // We can display the basic data immediately because we have it from the list screen
+        movieDetailsRepository.setInitialMovie(MovieDetails(
+                title = movie.title,
+                thumbnailUrl = movie.thumbnailUrl,
+                popularityScore = movie.popularityScore,
+                releaseDate = movie.releaseDate,
+                genresNames = movie.genresNames))
     }
 
     override fun onCleared() {

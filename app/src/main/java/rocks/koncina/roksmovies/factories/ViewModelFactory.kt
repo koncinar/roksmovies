@@ -12,7 +12,7 @@ class ViewModelFactory(private val instanceFactory: InstanceFactory) : ViewModel
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MoviesListViewModel::class.java)) {
-            return MoviesListViewModel(instanceFactory.moviesRepository()) as T
+            return MoviesListViewModel(instanceFactory.popularMoviesRepository()) as T
         }
 
         if (modelClass.isAssignableFrom(MovieDetailsViewModel::class.java)) {

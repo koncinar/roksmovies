@@ -24,7 +24,7 @@ private const val ARG_THUMBNAIL_URL = "arg_thumbnailUrl"
 private const val ARG_GENRE_IDS = "arg_genreIds"
 private const val ARG_POPULARITY_SCORE = "arg_popularityScore "
 private const val ARG_RELEASE_DATE = "arg_releaseDate"
-//private const val ARG_GENRES = "arg_genres"
+private const val ARG_GENRES_NAMES = "arg_genresNames"
 
 class MovieDetailsFragment : Fragment() {
 
@@ -40,7 +40,7 @@ class MovieDetailsFragment : Fragment() {
                     it.getLongArray(ARG_GENRE_IDS).asList(),
                     it.getFloat(ARG_POPULARITY_SCORE),
                     it.getString(ARG_RELEASE_DATE),
-                    null // todo: parse genres
+                    it.getString(ARG_GENRES_NAMES)
             )
         }
     }
@@ -80,7 +80,7 @@ class MovieDetailsFragment : Fragment() {
                         putLongArray(ARG_GENRE_IDS, movie.genreIds?.toLongArray())
                         putFloat(ARG_POPULARITY_SCORE, movie.popularityScore ?: 0F)
                         putString(ARG_RELEASE_DATE, movie.releaseDate)
-//                        putString(ARG_GENRES, movie.genres) // todo: pass genres
+                        putString(ARG_GENRES_NAMES, movie.genresNames)
                     }
                 }
     }
