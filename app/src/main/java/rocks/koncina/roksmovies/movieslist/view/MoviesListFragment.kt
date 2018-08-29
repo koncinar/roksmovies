@@ -9,9 +9,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import rocks.koncina.roksmovies.*
+import rocks.koncina.roksmovies.MainActivity
+import rocks.koncina.roksmovies.R
 import rocks.koncina.roksmovies.databinding.FragmentMoviesListBinding
 import rocks.koncina.roksmovies.movieslist.viewmodel.MoviesListViewModel
+import rocks.koncina.roksmovies.setTitle
 
 
 private const val ARG_QUERY = "arg_query"
@@ -61,14 +63,10 @@ class MoviesListFragment : Fragment() {
         if (searchQuery == null || searchQuery.isEmpty()) {
             // main page, showing popular movies
             setTitle(getString(R.string.title_list_popular))
-            showUp(false)
-            showSearch(true)
 
         } else {
             // search page, showing search results
             setTitle(getString(R.string.title_search_movie, searchQuery))
-            showUp(true)
-            showSearch(false)
         }
     }
 
