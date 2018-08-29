@@ -15,8 +15,6 @@ import rocks.koncina.roksmovies.moviedetails.viewmodel.MovieDetailsViewModel
 import rocks.koncina.roksmovies.moviedetails.viewmodel.UrlClickListener
 import rocks.koncina.roksmovies.movieslist.api.Movie
 import rocks.koncina.roksmovies.setTitle
-import rocks.koncina.roksmovies.showSearch
-import rocks.koncina.roksmovies.showUp
 
 
 private const val ARG_ID = "arg_id"
@@ -67,8 +65,6 @@ class MovieDetailsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         setTitle(movie.title.orEmpty())
-        showUp(true)
-        showSearch(false)
     }
 
     companion object {

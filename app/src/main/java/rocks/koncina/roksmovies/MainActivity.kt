@@ -28,11 +28,26 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment, MoviesListFragment.newInstance())
-                .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment, MoviesListFragment.newInstance())
+                    .commit()
+        }
+
+        // add listener to show/hide the search and up ActionBar buttons
+        supportFragmentManager.addOnBackStackChangedListener {
+            updateMenuItems()
+        }
+        updateMenuItems()
 
         handleIntent(intent)
+    }
+
+    private fun updateMenuItems() {
+        // home screen is not added to the back stack, so when we see it, the count is 0
+        val isHomeScreen = supportFragmentManager.backStackEntryCount == 0
+        searchMenuItem?.isVisible = isHomeScreen
+        supportActionBar?.setDisplayHomeAsUpEnabled(!isHomeScreen)
     }
 
     fun openMovieDetails(movie: Movie) {
@@ -95,12 +110,4 @@ class MainActivity : AppCompatActivity() {
 
 fun Fragment.setTitle(title: String) {
     (activity as AppCompatActivity).supportActionBar?.title = title
-}
-
-fun Fragment.showUp(show: Boolean) {
-    (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(show)
-}
-
-fun Fragment.showSearch(show: Boolean) {
-    (activity as MainActivity).searchMenuItem?.isVisible = show
 }
