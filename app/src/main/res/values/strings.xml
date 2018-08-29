@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Movies Ro(c)k</string>
 
+    <!--SEARCH-->
+    <string name="main_search_button">Search</string>
+    <string name="main_search_hint">Search hint</string>
+
     <!--TITLES-->
     <string name="title_list_popular">@string/app_name</string>
     <string name="title_search_movie">Search: %s</string>
