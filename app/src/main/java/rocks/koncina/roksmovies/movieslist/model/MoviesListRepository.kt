@@ -17,7 +17,9 @@ class MoviesListRepository(
 
         moviesRepository =
                 if (searchQuery == null) popularMoviesRepository
-                else searchMoviesRepository.init(searchQuery)
+                else searchMoviesRepository.apply { this.searchQuery = searchQuery }
+
+        moviesRepository.init()
 
         moviesRepository.movies
                 .subscribe(movies::onNext, movies::onError)
