@@ -14,11 +14,9 @@ class SearchMoviesRepository(
 ) : MoviesRepository {
 
     override val movies = BehaviorSubject.create<List<Movie>>()
-    private lateinit var searchQuery: String
+    lateinit var searchQuery: String
 
-    fun init(searchQuery: String): SearchMoviesRepository {
-        this.searchQuery = searchQuery
-        return this
+    override fun init() {
     }
 
     override fun fetch() {

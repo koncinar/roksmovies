@@ -16,7 +16,9 @@ class PopularMoviesRepository(
 
     override val movies = BehaviorSubject.create<List<Movie>>()
 
-    init {
+    override fun init() {
+        genresRepository.init()
+
         cacheRepository.cachedMovies
                 .subscribe(movies::onNext, movies::onError)
         cacheRepository.fetch()

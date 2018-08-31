@@ -1,6 +1,7 @@
 package rocks.koncina.roksmovies.movieslist.model
 
 import android.util.Log
+import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.SingleSubject
@@ -10,12 +11,13 @@ import rocks.koncina.roksmovies.movieslist.api.TheMovieDbService
 
 
 class GenresRepository(
-        theMovieDbService: TheMovieDbService
+        private val theMovieDbService: TheMovieDbService
 ) {
 
-    val genres = SingleSubject.create<Map<Long, String>>()
+    private val genresSubject = SingleSubject.create<Map<Long, String>>()
+    val genres: Single<Map<Long, String>> = genresSubject
 
-    init {
+    fun init() {
         theMovieDbService
                 // fetch the data from the server
                 .getGenres(BuildConfig.KEY_THE_MOVIE_DB)
@@ -30,7 +32,7 @@ class GenresRepository(
                             .associateBy({ it.id!! }, { it.name!! })
                 }
                 .doOnSuccess { Log.i(TAG, "Fetching genres from the API succeeded") }
-                .subscribe(genres::onSuccess, genres::onError)
+                .subscribe(genresSubject::onSuccess, genresSubject::onError)
     }
 
 
